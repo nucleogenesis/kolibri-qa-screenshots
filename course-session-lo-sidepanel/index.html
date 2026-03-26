@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Course Session - Learning Objective Side Panel</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; background: #f5f5f5; padding: 2rem; }
+  h1 { margin-bottom: 1.5rem; }
+  .phase { margin-bottom: 3rem; border: 1px solid #ddd; border-radius: 8px; background: #fff; overflow: hidden; }
+  .phase-header { background: #2a2a5a; color: #fff; padding: 1rem 1.5rem; }
+  .phase-header h2 { font-size: 1.2rem; }
+  .phase-header code { background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 3px; font-size: 0.9rem; }
+  .phase-header .session-id { font-size: 0.75rem; opacity: 0.7; margin-top: 0.25rem; }
+  .screenshot { padding: 1rem; text-align: center; }
+  .screenshot img { max-width: 100%; border: 1px solid #eee; border-radius: 4px; }
+  .screenshot .missing { color: #999; font-style: italic; padding: 3rem; }
+</style>
+</head>
+<body>
+<h1>Learning Objective Side Panel - All Phases</h1>
+
+<script>
+const phases = [
+  { phase: 'pre_test_pending', title: 'HB - Pre-test Pending', id: 'c2073bd3aef19708d7085d5e8375f2f7' },
+  { phase: 'pre_test_active', title: 'HB - Pre-test Active', id: 'e8165464c2b3fa51e22a7dec23a9049f' },
+  { phase: 'post_test_pending', title: 'HB - Post-test Pending', id: '51d84767dbf6ee6eaae395656c6b3e95' },
+  { phase: 'post_test_active', title: 'HB - Post-test Active', id: '9004fd6fab841d0264042976c0a3f7f6' },
+  { phase: 'complete', title: 'IC - Complete', id: '18029f67536389b848004944d2107009' },
+  { phase: 'pre_test_active_u2', title: 'IC - Unit 2 Pre-test Active', id: 'e947732a62de6c7430c0bb5b704d4bf7' },
+  { phase: 'post_test_active_u3', title: 'IC - Unit 3 Post-test Active', id: '1aaf9c20e29e007b0529160b4a0a4803' },
+];
+
+for (const p of phases) {
+  const section = document.createElement('div');
+  section.className = 'phase';
+  section.innerHTML = `
+    <div class="phase-header">
+      <h2>${p.title} &mdash; <code>${p.phase}</code></h2>
+      <div class="session-id">Session ID: ${p.id}</div>
+    </div>
+    <div class="screenshot">
+      <img src="${p.phase}.png" onerror="this.outerHTML='<div class=\\'missing\\'>Screenshot not found</div>'" />
+    </div>
+  `;
+  document.body.appendChild(section);
+}
+</script>
+</body>
+</html>
