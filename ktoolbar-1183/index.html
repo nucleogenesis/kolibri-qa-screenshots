@@ -1,0 +1,239 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>KToolbar before/after — KDS PR #1183</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #f5f5f5; margin: 0; padding: 24px; color: #222; }
+  h1 { margin: 0 0 6px 0; }
+  .sub { color: #666; margin-bottom: 24px; }
+  .sticky-legend { position: sticky; top: 0; z-index: 10; background: #f5f5f5; padding: 6px 0 14px 0; display: flex; gap: 24px; font-weight: 600; border-bottom: 1px solid #e0e0e0; margin-bottom: 18px; }
+  .sticky-legend .before-pill, .sticky-legend .after-pill { padding: 4px 12px; border-radius: 14px; font-size: 13px; }
+  .before-pill { background: #ffe0b2; color: #5d4037; }
+  .after-pill  { background: #c8e6c9; color: #1b5e20; }
+  .card { background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 28px; }
+  .card h2 { margin: 0; padding: 12px 16px; font-size: 15px; background: #fafafa; border-bottom: 1px solid #eee; }
+  .card .desc { padding: 8px 16px; color: #555; font-size: 13px; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #eee; }
+  .pair figure { margin: 0; background: white; }
+  .pair figcaption { padding: 6px 12px; font-size: 12px; color: #666; background: #fafafa; border-top: 1px solid #eee; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 8px; }
+  .pair figcaption .pill { padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+  .pair .before figcaption .pill { background: #ffe0b2; color: #5d4037; }
+  .pair .after  figcaption .pill { background: #c8e6c9; color: #1b5e20; }
+  .pair img { display: block; width: 100%; height: auto; }
+  .missing { display: flex; align-items: center; justify-content: center; min-height: 160px; color: #b71c1c; background: #fff3f3; font-size: 13px; }
+</style></head><body>
+<h1>KToolbar before / after</h1>
+<div class="sub">KDS PR #1183 (ktoolbar cleanup) · 15 pairs · captured against companion Kolibri branch <code>kds-ktoolbar-companion-fixes</code></div>
+<div class="sticky-legend">
+  <span class="before-pill">before</span>
+  <span class="after-pill">after</span>
+</div>
+<div class="card">
+  <h2>01-appbar-signin-anonymous</h2>
+  <div class="desc">AppBar: anonymous user on sign-in page</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>01-appbar-signin-anonymous.png</figcaption>
+      <img src="before/01-appbar-signin-anonymous.png" alt="before: 01-appbar-signin-anonymous">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>01-appbar-signin-anonymous.png</figcaption>
+      <img src="after/01-appbar-signin-anonymous.png" alt="after: 01-appbar-signin-anonymous">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>02-appbar-learner-home</h2>
+  <div class="desc">AppBar: learner on Learn "Home" (points icon visible)</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>02-appbar-learner-home.png</figcaption>
+      <img src="before/02-appbar-learner-home.png" alt="before: 02-appbar-learner-home">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>02-appbar-learner-home.png</figcaption>
+      <img src="after/02-appbar-learner-home.png" alt="after: 02-appbar-learner-home">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>03-appbar-learner-library</h2>
+  <div class="desc">AppBar: learner on Learn "Library"</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>03-appbar-learner-library.png</figcaption>
+      <img src="before/03-appbar-learner-library.png" alt="before: 03-appbar-learner-library">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>03-appbar-learner-library.png</figcaption>
+      <img src="after/03-appbar-learner-library.png" alt="after: 03-appbar-learner-library">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>04-appbar-learner-topic-browse</h2>
+  <div class="desc">AppBar: learner browsing a topic</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>04-appbar-learner-topic-browse.png</figcaption>
+      <img src="before/04-appbar-learner-topic-browse.png" alt="before: 04-appbar-learner-topic-browse">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>04-appbar-learner-topic-browse.png</figcaption>
+      <img src="after/04-appbar-learner-topic-browse.png" alt="after: 04-appbar-learner-topic-browse">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>05-appbar-learner-sidenav-open</h2>
+  <div class="desc">AppBar: learner with side nav drawer open</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>05-appbar-learner-sidenav-open.png</figcaption>
+      <img src="before/05-appbar-learner-sidenav-open.png" alt="before: 05-appbar-learner-sidenav-open">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>05-appbar-learner-sidenav-open.png</figcaption>
+      <img src="after/05-appbar-learner-sidenav-open.png" alt="after: 05-appbar-learner-sidenav-open">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>06a-learning-activity-bar-video</h2>
+  <div class="desc">LearningActivityBar: video resource (default raised shadow)</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>06a-learning-activity-bar-video.png</figcaption>
+      <img src="before/06a-learning-activity-bar-video.png" alt="before: 06a-learning-activity-bar-video">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>06a-learning-activity-bar-video.png</figcaption>
+      <img src="after/06a-learning-activity-bar-video.png" alt="after: 06a-learning-activity-bar-video">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>06b-learning-activity-bar-exercise</h2>
+  <div class="desc">LearningActivityBar: exercise resource (no shadow variant)</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>06b-learning-activity-bar-exercise.png</figcaption>
+      <img src="before/06b-learning-activity-bar-exercise.png" alt="before: 06b-learning-activity-bar-exercise">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>06b-learning-activity-bar-exercise.png</figcaption>
+      <img src="after/06b-learning-activity-bar-exercise.png" alt="after: 06b-learning-activity-bar-exercise">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>07-appbar-coach-home</h2>
+  <div class="desc">AppBar: coach on Coach home</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>07-appbar-coach-home.png</figcaption>
+      <img src="before/07-appbar-coach-home.png" alt="before: 07-appbar-coach-home">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>07-appbar-coach-home.png</figcaption>
+      <img src="after/07-appbar-coach-home.png" alt="after: 07-appbar-coach-home">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>08-appbar-coach-class-home</h2>
+  <div class="desc">AppBar: coach landing page</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>08-appbar-coach-class-home.png</figcaption>
+      <img src="before/08-appbar-coach-class-home.png" alt="before: 08-appbar-coach-class-home">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>08-appbar-coach-class-home.png</figcaption>
+      <img src="after/08-appbar-coach-class-home.png" alt="after: 08-appbar-coach-class-home">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>09-immersive-toolbar-coach-create-quiz</h2>
+  <div class="desc">ImmersiveToolbar: coach "Create new quiz" flow</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>09-immersive-toolbar-coach-create-quiz.png</figcaption>
+      <img src="before/09-immersive-toolbar-coach-create-quiz.png" alt="before: 09-immersive-toolbar-coach-create-quiz">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>09-immersive-toolbar-coach-create-quiz.png</figcaption>
+      <img src="after/09-immersive-toolbar-coach-create-quiz.png" alt="after: 09-immersive-toolbar-coach-create-quiz">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>10-appbar-admin-device-channels</h2>
+  <div class="desc">AppBar: admin on Device > Channels</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>10-appbar-admin-device-channels.png</figcaption>
+      <img src="before/10-appbar-admin-device-channels.png" alt="before: 10-appbar-admin-device-channels">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>10-appbar-admin-device-channels.png</figcaption>
+      <img src="after/10-appbar-admin-device-channels.png" alt="after: 10-appbar-admin-device-channels">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>11-immersive-toolbar-device-import</h2>
+  <div class="desc">ImmersiveToolbar: device content import (select channels page)</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>11-immersive-toolbar-device-import.png</figcaption>
+      <img src="before/11-immersive-toolbar-device-import.png" alt="before: 11-immersive-toolbar-device-import">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>11-immersive-toolbar-device-import.png</figcaption>
+      <img src="after/11-immersive-toolbar-device-import.png" alt="after: 11-immersive-toolbar-device-import">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>12-appbar-admin-facility-users</h2>
+  <div class="desc">AppBar: admin on Facility > Users</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>12-appbar-admin-facility-users.png</figcaption>
+      <img src="before/12-appbar-admin-facility-users.png" alt="before: 12-appbar-admin-facility-users">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>12-appbar-admin-facility-users.png</figcaption>
+      <img src="after/12-appbar-admin-facility-users.png" alt="after: 12-appbar-admin-facility-users">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>13-immersive-toolbar-user-edit-details</h2>
+  <div class="desc">ImmersiveToolbar: admin editing a learner (Facility > Users > Edit details)</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>13-immersive-toolbar-user-edit-details.png</figcaption>
+      <img src="before/13-immersive-toolbar-user-edit-details.png" alt="before: 13-immersive-toolbar-user-edit-details">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>13-immersive-toolbar-user-edit-details.png</figcaption>
+      <img src="after/13-immersive-toolbar-user-edit-details.png" alt="after: 13-immersive-toolbar-user-edit-details">
+    </figure>
+  </div>
+</div>
+<div class="card">
+  <h2>14-appbar-mobile-viewport</h2>
+  <div class="desc">AppBar at 360px mobile viewport (learner)</div>
+  <div class="pair">
+    <figure class="before">
+      <figcaption><span class="pill">before</span>14-appbar-mobile-viewport.png</figcaption>
+      <img src="before/14-appbar-mobile-viewport.png" alt="before: 14-appbar-mobile-viewport">
+    </figure>
+    <figure class="after">
+      <figcaption><span class="pill">after</span>14-appbar-mobile-viewport.png</figcaption>
+      <img src="after/14-appbar-mobile-viewport.png" alt="after: 14-appbar-mobile-viewport">
+    </figure>
+  </div>
+</div>
+</body></html>
