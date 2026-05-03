@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KDS #1236 — KToolbar #extension height clip</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #f5f5f5; margin: 0; padding: 24px; color: #222; max-width: 1100px; margin: 0 auto; }
+  h1 { margin: 0 0 6px 0; font-size: 24px; }
+  .lede { color: #555; margin: 0 0 24px 0; font-size: 14px; line-height: 1.5; }
+  .lede code { background: #ececec; padding: 1px 6px; border-radius: 3px; font-size: 13px; }
+  a { color: #0b6e4f; }
+  .card { background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 28px; }
+  .card h2 { margin: 0; padding: 14px 18px; font-size: 16px; background: #fafafa; border-bottom: 1px solid #eee; }
+  .card .desc { padding: 12px 18px; color: #444; font-size: 14px; line-height: 1.5; }
+  .card .desc code { background: #ececec; padding: 1px 5px; border-radius: 3px; font-size: 13px; }
+  .card .desc strong { color: #c62828; }
+  .card img { display: block; width: 100%; height: auto; border-top: 1px solid #eee; }
+  .meta { background: #fff8e1; border-left: 4px solid #f9a825; padding: 12px 16px; margin: 0 0 24px 0; font-size: 13px; line-height: 1.5; color: #5d4037; border-radius: 4px; }
+  .meta strong { color: #4e342e; }
+  .meta code { background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 3px; }
+  .toc { background: white; border-radius: 8px; padding: 12px 18px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); font-size: 14px; }
+  .toc strong { display: block; margin-bottom: 6px; font-size: 13px; color: #666; text-transform: uppercase; letter-spacing: 0.04em; }
+  .toc ol { margin: 0; padding-left: 20px; }
+  .toc li { margin: 2px 0; }
+</style>
+</head>
+<body>
+<h1>KDS #1236 — KToolbar <code>#extension</code> slot height clip</h1>
+<p class="lede">
+  Documenting a layout regression in Kolibri's <code>AppBar</code> after KDS PR #1236
+  introduced the <code>#extension</code> slot and dropped opinionated CSS defaults
+  (Path B). Sub-nav rendered in the <code>#extension</code> slot overflows the
+  height-capped <code>.k-toolbar</code> outer surface and lands in the transparent
+  area below the colored toolbar.
+</p>
+
+<div class="meta">
+  <strong>Setup:</strong>
+  KDS branch <code>1183--ktoolbar-cleanup</code> @ <code>a7474539b</code> (Path B);
+  Kolibri companion branch <code>kds-ktoolbar-companion-fixes</code> @ <code>470b7c9a0c</code>
+  (post-Phase 1+2: sub-nav moved into KToolbar's <code>#extension</code> slot).
+  Captured on <code>localhost:8004</code> (worktree venv) signed in as <code>a/a</code>.
+</div>
+
+<div class="toc">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#kds">KDS docs page — how the new layout is supposed to work</a></li>
+    <li><a href="#coach-annotated">Kolibri Coach (annotated) — the bug, in detail</a></li>
+    <li><a href="#coach">Kolibri Coach (clean) — without overlays</a></li>
+    <li><a href="#learn">Kolibri Learn home — same bug, different page</a></li>
+  </ol>
+</div>
+
+<div class="card" id="kds">
+  <h2>1. KDS docs page — <code>/ktoolbar</code> on the deploy preview</h2>
+  <div class="desc">
+    KToolbar's new structure renders correctly in KDS' own examples: the outer
+    <code>.k-toolbar</code> surface expands to fit both <code>.k-toolbar-main</code>
+    (the row, fixed height) and <code>.k-toolbar-extension</code> (variable height).
+    Each example sets <code>backgroundColor</code> via <code>:style</code> on
+    <code>KToolbar</code>; the colored surface naturally extends to wrap both rows.
+    See the <em>Extension (sub-toolbar)</em> example near the bottom — main row + sub-nav
+    sit inside the same yellow surface, no transparent gap.
+  </div>
+  <img src="01-kds-ktoolbar-examples.png" alt="KDS /ktoolbar docs page showing the seven canonical KToolbar examples — Default, Brand color, Inverted palette, Navigation and actions, Brand area, Not raised, and Extension. Each example shows the toolbar rendering correctly with content sitting inside a colored surface.">
+</div>
+
+<div class="card" id="coach-annotated">
+  <h2>2. Kolibri Coach page (annotated)</h2>
+  <div class="desc">
+    Same KToolbar component, used by Kolibri's <code>AppBar</code>. The yellow
+    <code>.k-toolbar</code> outer is height-constrained to <strong>64px</strong> by an
+    inline <code>style="height: topBarHeight + 'px'"</code> from
+    <code>useNav()</code> (Material spec: 56px small / 64px large). Inside it,
+    <code>.k-toolbar-main</code> is 56px and <code>.k-toolbar-extension</code> is 48px
+    (KDS <code>min-height: 3rem</code>) — total content needs <strong>104px</strong>,
+    overflows the 64px cap by <strong>~63px</strong>. The sub-nav (Class home,
+    Courses, Lessons, Quizzes, Learners, Groups) renders below the yellow surface
+    in transparent area.
+  </div>
+  <img src="05-kolibri-coach-annotated.png" alt="Kolibri Coach page with overlay annotations: red dashed line marks where the .k-toolbar bottom (64px) ends and the yellow background stops. Blue outline marks the .k-toolbar-extension element which contains the sub-nav tabs and overflows by 63px into the transparent area below.">
+</div>
+
+<div class="card" id="coach">
+  <h2>3. Kolibri Coach page (no annotations)</h2>
+  <div class="desc">
+    Same page without the overlay. The yellow rectangle ends abruptly at 64px,
+    then the sub-nav (Class home / Courses / Lessons / Quizzes / Learners / Groups)
+    renders on the page's white background. Visually obvious the sub-nav is no
+    longer inside the toolbar surface.
+  </div>
+  <img src="04-kolibri-coach.png" alt="Kolibri Coach page showing the layout regression. Yellow toolbar at top contains only 'Coach' title and user avatar. Below the yellow rectangle, on a light gray page background, the sub-nav tabs (Class home, Courses, Lessons, Quizzes, Learners, Groups) render disconnected from the colored toolbar surface.">
+</div>
+
+<div class="card" id="learn">
+  <h2>4. Kolibri Learn home</h2>
+  <div class="desc">
+    Same bug appears on the Learn home page. Yellow toolbar shows "Learn" + user
+    avatar at top, then Home / Library / Bookmarks render below the colored
+    surface. Same root cause: the inline <code>height</code> on
+    <code>KToolbar</code>'s root caps the outer surface at 64px while
+    <code>.k-toolbar-extension</code> renders its full 48px height below the cap.
+  </div>
+  <img src="02-kolibri-learn-home.png" alt="Kolibri Learn home page. Yellow toolbar at top with 'Learn' title and user avatar. Home, Library, Bookmarks tabs render below in transparent area, separated from the toolbar by a visible boundary.">
+</div>
+
+</body>
+</html>
